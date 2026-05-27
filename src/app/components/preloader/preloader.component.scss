@@ -1,0 +1,70 @@
+:host {
+  display: contents;
+}
+
+.retro-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 320ms ease, visibility 320ms ease;
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.retro-preloader__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.retro-preloader__dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.retro-preloader__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: retro-preloader-bounce 1.2s infinite ease-in-out both;
+
+  &:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+}
+
+.retro-preloader__label {
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+@keyframes retro-preloader-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

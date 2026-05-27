@@ -1,0 +1,37 @@
+<div class="retro-board">
+  <header class="retro-board__header">
+    <div class="retro-board__brand">
+      <h1 class="retro-board__title">Retrospective Wall</h1>
+      <p class="retro-board__subtitle">Capture what happened. Plan what's next.</p>
+    </div>
+    <app-toolbar
+      [viewFilter]="(viewFilter$ | async) ?? 'all'"
+      [sortOption]="(sortOption$ | async) ?? 'created-desc'"
+      (viewFilterChanged)="onViewFilterChanged($event)"
+      (sortOptionChanged)="onSortOptionChanged($event)"
+    />
+  </header>
+
+  @if (cardsBySection$ | async; as bySection) {
+    @if (viewFilter$ | async; as filter) {
+      <div class="retro-board__grid">
+        @for (cfg of sections; track cfg.id) {
+          @if (filter === 'all' || filter === cfg.id) {
+            <app-section
+              [config]="cfg"
+              [cards]="bySection[cfg.id]"
+              [newlyAddedCardId]="newlyAddedCardId"
+              [connectedDropListIds]="connectedDropListIds"
+              (addRequested)="onAdd(cfg.id)"
+              (cardTextSaved)="onTextSaved($event)"
+              (cardVoteIncremented)="onVoteIncremented($event)"
+              (cardDeleted)="onDeleted($event)"
+              (cardEditRequested)="onEditRequested($event)"
+              (cardMoved)="onDrop($event)"
+            />
+          }
+        }
+      </div>
+    }
+  }
+</div>

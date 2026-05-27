@@ -1,0 +1,41 @@
+@if (editingCard$ | async; as card) {
+  <div
+    class="retro-modal__backdrop"
+    role="presentation"
+    (click)="onBackdropClick()"
+  >
+    <div
+      class="retro-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="retro-modal-title"
+      (click)="onModalClick($event)"
+    >
+      <h2 id="retro-modal-title" class="retro-modal__title">Edit card</h2>
+      <textarea
+        #modalTextarea
+        class="retro-modal__textarea"
+        rows="6"
+        [(ngModel)]="draftText"
+        (keydown)="onKeydown($event, card)"
+        aria-label="Card text"
+      ></textarea>
+      <div class="retro-modal__actions">
+        <button
+          type="button"
+          class="retro-modal__cancel"
+          (click)="onCancel()"
+        >
+          CANCEL
+        </button>
+        <button
+          type="button"
+          class="retro-modal__save"
+          (click)="onSave(card)"
+        >
+          SAVE
+        </button>
+      </div>
+    </div>
+  </div>
+}

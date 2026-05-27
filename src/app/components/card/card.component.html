@@ -1,0 +1,41 @@
+<article
+  class="retro-card"
+  [class.retro-card--editing]="isEditingInline"
+  [style.--rotation]="rotationDegrees"
+  [attr.tabindex]="isEditingInline ? -1 : 0"
+  (click)="onBodyClick()"
+  (keydown)="onBodyKeydown($event)"
+>
+  @if (isEditingInline) {
+    <textarea
+      #inlineTextarea
+      class="retro-card__textarea"
+      rows="3"
+      aria-label="New card text"
+      (input)="onInlineInput($any($event.target).value)"
+      (keydown)="onInlineKeydown($event)"
+      (blur)="onInlineBlur()"
+    ></textarea>
+  } @else {
+    <p class="retro-card__text">{{ card.text }}</p>
+    <div class="retro-card__footer">
+      <button
+        type="button"
+        class="retro-card__vote"
+        [attr.aria-label]="'Upvote card. Current votes: ' + card.votes"
+        (click)="onVoteClick($event)"
+      >
+        <span class="retro-card__vote-plus" aria-hidden="true">+</span>
+        <span class="retro-card__vote-count">{{ card.votes }}</span>
+      </button>
+      <button
+        type="button"
+        class="retro-card__delete"
+        aria-label="Delete card"
+        (click)="onDeleteClick($event)"
+      >
+        &times;
+      </button>
+    </div>
+  }
+</article>

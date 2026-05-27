@@ -1,0 +1,66 @@
+@use '../../styles/mixins' as m;
+
+:host {
+  display: block;
+}
+
+.retro-board {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-4);
+
+  @include m.tablet {
+    padding: var(--space-5);
+  }
+
+  @include m.desktop {
+    padding: var(--space-6);
+  }
+}
+
+.retro-board__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+
+  @include m.tablet {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+}
+
+.retro-board__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.retro-board__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+
+  @include m.desktop {
+    font-size: 1.9rem;
+  }
+}
+
+.retro-board__subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.retro-board__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+
+  @include m.tablet {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+}

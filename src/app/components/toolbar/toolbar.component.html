@@ -1,0 +1,29 @@
+<div class="retro-toolbar">
+  <label class="retro-toolbar__field">
+    <span class="retro-toolbar__label">View Section</span>
+    <select
+      class="retro-toolbar__select"
+      [value]="viewFilter"
+      (change)="onViewChange($event)"
+      aria-label="Filter visible sections"
+    >
+      @for (option of viewOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="retro-toolbar__field">
+    <span class="retro-toolbar__label">Sort By</span>
+    <select
+      class="retro-toolbar__select"
+      [value]="sortOption"
+      (change)="onSortChange($event)"
+      aria-label="Sort cards"
+    >
+      @for (option of sortOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </label>
+</div>

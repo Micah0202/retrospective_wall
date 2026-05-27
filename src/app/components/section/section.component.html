@@ -1,0 +1,40 @@
+<section class="retro-section" [class]="config.themeClass">
+  <header class="retro-section__header">
+    <h2 class="retro-section__title">{{ config.title }}</h2>
+    <button
+      type="button"
+      class="retro-section__add"
+      [attr.aria-label]="'Add card to ' + config.title"
+      (click)="onAdd()"
+    >
+      <span aria-hidden="true">+</span>
+    </button>
+  </header>
+
+  <div
+    class="retro-section__list"
+    cdkDropList
+    [id]="config.id"
+    [cdkDropListData]="cards"
+    [cdkDropListConnectedTo]="connectedDropListIds"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    @for (card of cards; track card.id; let i = $index) {
+      <app-card
+        cdkDrag
+        [cdkDragData]="card"
+        [card]="card"
+        [isEditingInline]="card.id === newlyAddedCardId"
+        [rotationIndex]="i"
+        (textSaved)="onTextSaved(card.id, $event)"
+        (voteIncremented)="cardVoteIncremented.emit(card.id)"
+        (deleted)="cardDeleted.emit(card.id)"
+        (editRequested)="cardEditRequested.emit(card.id)"
+      />
+    }
+
+    @if (cards.length === 0) {
+      <p class="retro-section__empty">No cards yet &mdash; click + to add one</p>
+    }
+  </div>
+</section>

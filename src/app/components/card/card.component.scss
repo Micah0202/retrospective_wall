@@ -1,0 +1,121 @@
+:host {
+  display: block;
+}
+
+.retro-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  min-height: 90px;
+  box-shadow: var(--shadow-sm);
+  transform: rotate(calc(var(--rotation, 0) * 1deg));
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    transform: rotate(calc(var(--rotation, 0) * 1deg)) translateY(-2px);
+    box-shadow: var(--shadow-md);
+
+    .retro-card__delete {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &--editing {
+    cursor: text;
+    transform: rotate(0deg);
+    box-shadow: var(--shadow-md);
+
+    &:hover {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.retro-card__text {
+  font-family: var(--font-card);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.retro-card__textarea {
+  width: 100%;
+  min-height: 80px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  font-family: var(--font-card);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.retro-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.retro-card__vote {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background var(--transition-fast), color var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: scale(1.05);
+  }
+}
+
+.retro-card__vote-plus {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.retro-card__delete {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), background var(--transition-fast),
+    color var(--transition-fast);
+
+  &:hover {
+    background: var(--color-danger);
+    color: #fff;
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
